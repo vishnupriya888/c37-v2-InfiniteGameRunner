@@ -1,7 +1,10 @@
-html, body {
-  margin: 0;
-  padding: 0;
+html,
+body {
+  margin: 100;
+  padding: 100;
+  align-self: center;
 }
 canvas {
   display: block;
+  border: 6px solid maroon;
 }

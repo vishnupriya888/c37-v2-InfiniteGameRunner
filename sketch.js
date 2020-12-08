@@ -43,7 +43,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth - 10, windowHeight - 10);
+  createCanvas(windowWidth - 50, windowHeight - 20);
 
   trex = createSprite(50, windowHeight - 60, 20, 50);
   trex.addAnimation("running", trex_running);
@@ -74,8 +74,6 @@ function setup() {
     10
   );
   invisibleGround.visible = false;
-
-  //create Obstacle and Cloud Groups
   obstaclesGroup = createGroup();
   cloudsGroup = createGroup();
 
@@ -93,7 +91,8 @@ function setup() {
 function draw() {
   background("white");
   //displaying score
-  text("Score: " + score, windowWidth / 2 + camera.position.x - 100, 50);
+  textSize(15);
+  text("Score: " + score, windowWidth / 2 + camera.position.x - 200, 120);
   text(
     "Highest Score : " + localStorage["highestScore"],
     windowWidth / 2 + camera.position.x - 200,
@@ -118,26 +117,22 @@ function draw() {
       invisibleGround.x = camera.position.x;
     }
 
-    //jump when the space key is pressed
     if (
       (touches.length > 0 || keyDown("space")) &&
       trex.y >= windowHeight - 80
     ) {
       trex.velocityY = -12;
 
-      // to avoid continuous jumping sound
       if (soundFlag === "silent") {
         jumpSound.play();
         soundFlag = "played";
       }
-      //empty the array after trex jumps
+
       touches = [];
     }
     if (keyWentUp("space")) {
       soundFlag = "silent";
     }
-
-    //add gravity
     trex.velocityY = trex.velocityY + 0.8;
 
     //spawn the clouds
